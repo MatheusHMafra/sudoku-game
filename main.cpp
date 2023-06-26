@@ -1,11 +1,14 @@
 #include <iostream>
+#include <locale.h>
 
 #define TAM 9
 
 using namespace std;
 
 int main() {
+    setlocale(LC_ALL, "Portuguese");
     srand(time(NULL));
+    
     int linha = 0, coluna = 0, option = 0, option1 = 0;
     int principal[TAM][TAM] = { {4,9,5,2,8,7,3,6,1},
                                 {7,2,8,6,1,3,4,9,5},
@@ -22,6 +25,7 @@ int main() {
     bool vitoria = false;
 
     do {
+        system("clear");
         cout << "--------------------------------------------------------" << endl;
         cout << "--------------------------------------------------------" << endl;
         cout << "                       Sudoku" << endl;
@@ -66,7 +70,7 @@ int main() {
                     }
                 }
 
-                for (int z = 0; z < 41; z++) {
+                for (int z = 0; z < 80; z++) {
                     do {
                         linha = rand() % TAM;
                         coluna = rand() % TAM;
@@ -75,7 +79,7 @@ int main() {
                 }
 
                 while (!vitoria) {
-                    cout << endl;
+                    cout << endl; //Imprime matriz jogo
                     for (linha = 0; linha < TAM; linha++) {
                         if (linha % 3 == 0 || linha % 6 == 0) {
                             cout << " -----------------------" << endl;
@@ -97,7 +101,7 @@ int main() {
                     cout << "Escolha um número (1-9): ";
                     cin >> option;
 
-                    if (linha >= 0 && linha < TAM && coluna >= 0 && coluna < TAM && option >= 1 && option <= 9) {
+                    if (linha >= 0 && linha < TAM && coluna >= 0 && coluna < TAM && option >= 1 && option <= 9) { //Verifica  jogo com gabarito
                         if (jogo[linha][coluna] == 0) {
                             if (option == gabarito[linha][coluna]) {
                                 jogo[linha][coluna] = option;
@@ -151,6 +155,7 @@ int main() {
                 break;
 
             case 2:
+                system("clear");
                 cout << "Equipe de desenvolvimento: Leonardo Borges, Lucas Barcia e Matheus Mafra" << endl;
                 cout << "Mês/ano: Junho/2023" << endl;
                 cout << "Professor: Rafael Ballottin" << endl;
@@ -161,11 +166,13 @@ int main() {
                 break;
 
             default:
+                system("clear");
                 cout << endl << "Opção inválida. Tente novamente." << endl;
                 break;
         }
     } while (option != 3);
-
+    
+    system("clear");
     cout << endl << "Obrigado por jogar! Até a próxima." << endl;
 
     return 0;

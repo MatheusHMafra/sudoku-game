@@ -1,3 +1,6 @@
+/*
+  Alunos: Leonardo Borges Lopes, Lucas Barcia López Hellmann e Matheus Henrique Tomelin Mafra
+*/
 #include <iostream>
 #include <locale.h>
 

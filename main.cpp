@@ -75,7 +75,7 @@ int main(){
                 }
             }
 
-            for (int z = 0; z < 80; z++){ // Preenchimento aleatório da matriz jogo
+            for (int z = 0; z < 41; z++){ // Preenchimento aleatório da matriz jogo
                 do{
                     linha = rand() % TAM;
                     coluna = rand() % TAM;

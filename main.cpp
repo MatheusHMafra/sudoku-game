@@ -9,7 +9,7 @@ int main(){
     setlocale(LC_ALL, "Portuguese");
     srand(time(NULL));
 
-    int linha = 0, coluna = 0, option = 0, option1 = 0;
+    int linha = 0, coluna = 0, option = 0, option1 = 0, option2;
     int principal[TAM][TAM] = {{4, 9, 5, 2, 8, 7, 3, 6, 1},
                                {7, 2, 8, 6, 1, 3, 4, 9, 5},
                                {3, 6, 1, 9, 5, 4, 7, 2, 8},
@@ -39,39 +39,32 @@ int main(){
 
         switch (option){
         case 1: // Case para iniciar o jogo
-            system("clear");
             vitoria = false;
+            system("clear");
             option1 = rand() % 4 + 1; // Sortear a matriz a ser utilizada
             if (option1 == 1){ // Se for sorteado "1", a matriz gabarito será utilizada
-                for (linha = 0; linha < TAM; linha++)
-                {
-                    for (coluna = 0; coluna < TAM; coluna++)
-                    {
+                for (linha = 0; linha < TAM; linha++){
+                    for (coluna = 0; coluna < TAM; coluna++){
                         gabarito[linha][coluna] = principal[linha][coluna];
                     }
                 }
             }
             else if (option1 == 2){ // Se for sorteado "2", a matriz transposta será utilizada
-                for (linha = 0; linha < TAM; linha++)
-                {
-                    for (coluna = 0; coluna < TAM; coluna++)
-                    {
+                for (linha = 0; linha < TAM; linha++){
+                    for (coluna = 0; coluna < TAM; coluna++){
                         gabarito[linha][coluna] = principal[coluna][linha];
                     }
                 }
             }
             else if (option1 == 3){ // Se for sorteado "3", a matriz invertida por linha será utilizada
-                for (linha = 8; linha >= 0; linha--)
-                {
-                    for (coluna = 0; coluna < TAM; coluna++)
-                    {
+                for (linha = 8; linha >= 0; linha--){
+                    for (coluna = 0; coluna < TAM; coluna++){
                         gabarito[8 - linha][coluna] = principal[linha][coluna];
                     }
                 }
             }
             else if (option1 == 4){ // Se for sorteado "4", a matriz invertida por coluna será utilizada
-                for (linha = 0; linha < TAM; linha++)
-                {
+                for (linha = 0; linha < TAM; linha++){
                     for (coluna = 8; coluna >= 0; coluna--)
                     {
                         gabarito[linha][8 - coluna] = principal[linha][coluna];
@@ -111,16 +104,16 @@ int main(){
                 cin >> coluna;
                 coluna--;
                 cout << "Escolha um número (1-9): ";
-                cin >> option;
+                cin >> option2;
 
-                if (linha >= 0 && linha < TAM && coluna >= 0 && coluna < TAM && option >= 1 && option <= 9){ // Verifica os número digitado
+                if (linha >= 0 && linha < TAM && coluna >= 0 && coluna < TAM && option2 >= 1 && option2 <= 9){ // Verifica os número digitado
                     if (jogo[linha][coluna] == 0){
-                        if (option == gabarito[linha][coluna]){
+                        if (option2 == gabarito[linha][coluna]){
                             cout << "Número correto!" << endl;
-                            jogo[linha][coluna] = option;
+                            jogo[linha][coluna] = option2;
                             cout << "Pressione Enter para continuar..." << endl;
                             system("read 0 -p");
-
+                            
                             vitoria = true;
                             for (linha = 0; linha < TAM; linha++){ // Verifica os número digitado com o gabarito
                                 for (coluna = 0; coluna < TAM; coluna++){
@@ -149,17 +142,25 @@ int main(){
                 }
             } while (!vitoria);
 
-            if (vitoria) { // Condição caso o jogador vença
+            if (vitoria) {
                 system("clear");
+                cout << endl;
                 cout << "Parabéns! Você venceu o jogo!" << endl;
                 cout << "Pressione Enter para continuar..." << endl;
                 system("read 0 -p");
+        
+                for (linha = 0; linha < TAM; linha++) { // Reinicializa a matriz jogo para começar um novo jogo
+                    for (coluna = 0; coluna < TAM; coluna++) {
+                        jogo[linha][coluna] = 0;
+                    }
+                }
             }
 
             break;
 
         case 2: // Case para a página "Sobre"
             system("clear");
+            cout << endl;
             cout << "Equipe de desenvolvimento: Leonardo Borges, Lucas Barcia e Matheus Mafra" << endl;
             cout << "Mês/ano: Junho/2023" << endl;
             cout << "Professor: Rafael Ballottin" << endl;
@@ -170,8 +171,7 @@ int main(){
 
         default: // Case para opção inválida
             system("clear");
-            cout << endl
-                 << "Opção inválida. Tente novamente." << endl;
+            cout << endl << "Opção inválida. Tente novamente." << endl;
             break;
         }
     } while (option != 3); // Enquanto a opção "3" não for selecionado o código rodará
